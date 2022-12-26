@@ -1,6 +1,7 @@
 let title  = document.querySelector('.title');
 let tern = 'x'
 let squares = [];
+let cnt = 0;
 function win(n1 , n2 , n3){
     title.innerHTML = `${squares[n1]} is the winner`;
     document.getElementById('item' + n1).style.backgroundColor = 'red';
@@ -38,6 +39,11 @@ function winner(){
     if(squares[3] == squares[5] && squares[5] == squares[7] && squares[3] != ''){
         win(3,5,7);
     }
+    if(cnt == 9){
+        title.innerHTML = 'Draw';
+        setInterval(function(){title.innerHTML += '.'}, 1000);
+        setTimeout(function(){location.reload()}, 3000);
+    }
 
     
 
@@ -45,10 +51,12 @@ function winner(){
 function game(id){
     let element = document.getElementById(id);
     if(tern === 'x' && element.innerHTML == ''){
+        cnt++;
         element.innerHTML = 'x';
         tern = 'o';
         title.innerHTML = 'O Turn';
     }else if(tern === 'o' && element.innerHTML == ''){
+        cnt++;
         element.innerHTML = 'o';
         tern = 'x';
         title.innerHTML = 'X Turn';
